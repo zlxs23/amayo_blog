@@ -146,6 +146,16 @@
 </ol>
 </li>
 </ol>
+<hr />
+<div class="highlight"><pre><span></span>9/15/2016 11:48:48 AM 
+因为之前 github 改版，将 github pages 从 http 到 https 导致我的样式及其他页面无法正常载入
+解决方法：
+    设置 amayo_blog 下 pelicanconf.py 及 publishconf.py 中 文件配置 修改 
+        SITEURL = &#39;http://zlxs23.github.io&#39;
+            为
+        SITEURL = &#39;https://zlxs23.github.io&#39;
+    这样在 Pelican 生成页面时才能正常加载其他页面。
+</pre></div>
                 </div><!-- /.entry-content -->
         </article>
 </section>
