@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/pygment.css" />
 
         <script src="https://zlxs23.github.io/theme/js/libs/modernizr-2.6.2.min.js"></script>
+        <script src="https://zlxs23.github.io/theme/js/libs/jquery-1.9.1.min.js"></script>
 
 
 
@@ -34,12 +35,33 @@
 
             <div id="navigation" class="navbar row">
               <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
               <ul class="columns">
                 <li><a href="https://zlxs23.github.io/">Home</a></li>
 
-                <li><a href="about.html">About</a></li>
-                <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+            <script type="text/javascript">
+              if (About == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="about.html">About</a></li>
+            <script type="text/javascript">
+              if (Wiki == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+            <script type="text/javascript">
+              if (Source == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
 
               </ul>
             </div>
@@ -95,6 +117,7 @@
  <ul>
       <li><a href="about.html">About</a></li>
       <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+      <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
   </ul>
 
 <h4>Categories</h4>

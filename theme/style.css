@@ -182,7 +182,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 a, a:hover { color: #3498DB; }
 a:focus { color: #34495E; }
 
-.btn a:hover, 
+.btn a:hover,
 .btn a:focus {color:#eee; }
 
 .label:hover,
@@ -194,7 +194,7 @@ ul, ol {
 }
 
 ul {
-  list-style: disc outside;
+  list-style: outside none disc;
 }
 
 ul.blank {
