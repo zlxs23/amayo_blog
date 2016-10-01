@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <title>Python 中使用 嵌套类</title>
+        <meta charset="utf-8" />
+          <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico">
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/pygment.css" />
+
+        <script src="https://zlxs23.github.io/theme/js/libs/modernizr-2.6.2.min.js"></script>
+        <script src="https://zlxs23.github.io/theme/js/libs/jquery-1.9.1.min.js"></script>
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="https://zlxs23.github.io/">Amayo <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+              <ul class="columns">
+                <li><a href="https://zlxs23.github.io/">Home</a></li>
+
+            <script type="text/javascript">
+              if (About == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="about.html">About</a></li>
+            <script type="text/javascript">
+              if (Wiki == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+            <script type="text/javascript">
+              if (Source == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="https://zlxs23.github.io/nested.html" rel="bookmark"
+                   title="Permalink to Python 中使用 嵌套类">Python 中使用 嵌套类</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2016-10-01T00:00:00+08:00">
+                2016-10-01
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="https://zlxs23.github.io/author/amayou.html"> Amayou</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h1>结合 嵌套类 进行 链表的实现</h1>
+<h4>引子</h4>
+<p>&nbsp;&nbsp;今天是国庆节，也是我加强算法和数据结构的第一天，目的是尝试将 C 与 CPP 实现的 数据结构 或 算法 利用 Python 实现下，尤其是加强下自己的算法设计能力，每每言此即想到 CloudIn 的面试，时间很紧，自己水平一般，找到问题，赶紧弥补。
+&nbsp;&nbsp;进入正题，本来是要参考并实现 单链表 结构，结果看到了 Nested Class 本来不知道怎么查相关资料 或者说这个关键字不知道，就说 "类中类"，百度没有，就 SOV5 {Class in Class} 专业术语叫 嵌套类，惭愧！之前接触 Django 是就出现了 嵌套类，即 metaclass 的实现。</p>
+<hr />
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;docstring for Book&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Book</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+
+<span class="k">class</span> <span class="nc">MzBook</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;docstring for MzBook&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MzBook</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">Book</span>
+
+    <span class="k">def</span> <span class="nf">blabla</span><span class="p">():</span>
+        <span class="k">pass</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>以上 *__metaclass__* 并未嵌套，但是却影响我的之后 对 Python 类的神奇看法
+</pre></div>
+
+
+<hr />
+<h4>单链表</h4>
+<p>&nbsp;&nbsp;接下来分析 单链表 的构成。若下图 节点 A 与 节点 B 实现了一个简单的 链表
+<img src="images/LinkedList.png" width="500" height="120"><br>
+链表是由一个一个节点连成的<strong>表</strong>，一个节点分为 data &amp; pointer 分别存储 该节点 的 数据内容 与 下一个 节点  的 <strong>地址</strong>，如下图所示，python 实现的 SingleLinkedList 对应 链表的数据结构
+<img src="images/Listinstance.png" width="300" height="120"><br>
+以上 <em>l</em>  是一个 链表 实例 他有 5 个节点</p>
+<h4>嵌套类</h4>
+<hr />
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># 结合 嵌套类 进行 链表的实现</span>
+
+<span class="k">class</span> <span class="nc">SingleLinkedList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;docstring for SingleLinkedList&quot;&quot;&quot;</span>
+    <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;docstring for Node&quot;&quot;&quot;</span>
+        <span class="n">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_data&#39;</span><span class="p">,</span> <span class="s1">&#39;_next&#39;</span><span class="p">]</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">_data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
+        <span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next</span>
+
+        <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">=</span> <span class="n">_data</span>
+
+        <span class="k">def</span> <span class="nf">setNext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_next</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="n">_next</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initLinkedList</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SingleLinkedList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="c1"># 首 初始化 为 空</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">initLinkedList</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">transition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+            <span class="k">for</span> <span class="n">_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="mi">1</span><span class="p">:])):</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="n">_index</span><span class="p">])</span><span class="err">··</span><span class="c1"># self.Node(_data)</span>
+                <span class="k">if</span> <span class="n">_index</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">):</span>
+                    <span class="n">transition</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="n">node</span>
+                    <span class="n">transition</span> <span class="o">=</span> <span class="n">transition</span><span class="o">.</span><span class="n">_next</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">transition</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">isEmpty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;判断 链表 是否为空&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">==</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;判断 链表 长度&quot;&quot;&quot;</span>
+        <span class="n">currentNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">currentNode</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+        <span class="c1"># self._size = count</span>
+        <span class="c1"># return self._size</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">travel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;遍历&quot;&quot;&quot;</span>
+        <span class="n">currentNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+        <span class="k">while</span> <span class="n">currentNode</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getData</span><span class="p">()</span>
+            <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">appendleft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;前端 添加 元素&quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="n">node</span>
+
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;后端 添加 元素&quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="c1"># 若 空表 直接置为 head</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 不是 则 找到最后一个</span>
+            <span class="n">currentNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+            <span class="k">while</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+            <span class="n">currentNode</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">,</span> <span class="n">_position</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;任意位置 添加 元素&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">_position</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">_position</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+            <span class="n">currentNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">pre</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">_position</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">pre</span> <span class="o">=</span> <span class="n">currentNode</span>
+                <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+            <span class="n">pre</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">currentNode</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;任意位置 删除 元素&quot;&quot;&quot;</span>
+        <span class="n">currentNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span><span class="o">.</span><span class="n">getData</span><span class="p">()</span> <span class="o">==</span> <span class="n">_data</span><span class="p">:</span>
+            <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;该链表没有这个元素&#39;</span><span class="p">)</span>
+        <span class="n">Deleted</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+        <span class="n">DeletedNext</span> <span class="o">=</span> <span class="n">Deleted</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+        <span class="n">currentNode</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">DeletedNext</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;搜索 元素 是否 在 链表中&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;检索 元素 所处 在 链表中 位置&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+
+
+<hr />
+<p>以上 SingleLinkedList 类中 定义 Node 类  <strong>[嵌套类]</strong>，当 SingleLinkedList 调用 Node 类时 直接 在 类中声明 <em>self.Node(_data)</em> ，即调用了并构成了一个节点
+不同于 我的 调用方式<br>
+参考 <a href="http://www.cnblogs.com/aguncn/p/4200113.html" title="内部类中调用外部类的方法">http://www.cnblogs.com/aguncn/p/4200113.html</a><br>
+他是通过 语法糖 @classmethod 来实现 <strong>类方法</strong> 对 内部类的调用</p>
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h2>Comments !</h2>
+              <!-- Duoshuo Comment BEGIN -->
+              <div class="ds-thread" data-title="Python 中使用 嵌套类" data-url="https://zlxs23.github.io/nested.html"></div>
+              <script type="text/javascript">
+                var duoshuoQuery = {short_name:"amayou"};
+                (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- Duoshuo Comment END -->
+            </div>
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+      <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="https://zlxs23.github.io/category/job.html">job</a></li>
+		<li><a href="https://zlxs23.github.io/category/life.html">life</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://weibo.com/u/2219037751">Weibo</a></li>
+    <li><a href="https://github.com/zlxs23">Github</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                <li><div class="btn primary"><a href="https://github.com/zlxs23" target="_blank">Github</a></div></li>
+
+                <li><div class="btn twitter"><a href="http://weibo.com/amayou" target="_blank">Weibo</a></div></li>
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="https://zlxs23.github.io/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="https://zlxs23.github.io/theme/js/libs/gumby.min.js"></script>
+  <script src="https://zlxs23.github.io/theme/js/plugins.js"></script>
+</body>
+</html>
