@@ -84,7 +84,7 @@
               </address>
             </footer><!-- /.post-info -->
             <div class="entry-content">
-              <h1>结合 嵌套类 进行 链表的实现</h1>
+              <h3>结合嵌套类进行链表的实现</h3>
 <h4>引子</h4>
 <p>&nbsp;&nbsp;今天是国庆节，也是我加强算法和数据结构的第一天，目的是尝试将 C 与 CPP 实现的 数据结构 或 算法 利用 Python 实现下，尤其是加强下自己的算法设计能力，每每言此即想到 CloudIn 的面试，时间很紧，自己水平一般，找到问题，赶紧弥补。
 &nbsp;&nbsp;进入正题，本来是要参考并实现 单链表 结构，结果看到了 Nested Class 本来不知道怎么查相关资料 或者说这个关键字不知道，就说 "类中类"，百度没有，就 SOV5 {Class in Class} 专业术语叫 嵌套类，惭愧！之前接触 Django 是就出现了 嵌套类，即 metaclass 的实现。</p>
@@ -114,11 +114,11 @@
 
 <hr />
 <h4>单链表</h4>
-<p>&nbsp;&nbsp;接下来分析 单链表 的构成。若下图 节点 A 与 节点 B 实现了一个简单的 链表
+<p>&nbsp;&nbsp;接下来分析 单链表 的构成。若下图 节点 A 与 节点 B 实现了一个简单的 链表<br>
 <img src="images/LinkedList.png" width="500" height="120"><br>
-链表是由一个一个节点连成的<strong>表</strong>，一个节点分为 data &amp; pointer 分别存储 该节点 的 数据内容 与 下一个 节点  的 <strong>地址</strong>，如下图所示，python 实现的 SingleLinkedList 对应 链表的数据结构
+链表是由一个一个节点连成的<strong>表</strong>，一个节点分为 data &amp; pointer 分别存储 该节点 的 数据内容 与 下一个 节点  的 <strong>地址</strong>，如下图所示，python 实现的 SingleLinkedList 对应 链表的数据结构<br>
 <img src="images/Listinstance.png" width="300" height="120"><br>
-以上 <em>l</em>  是一个 链表 实例 他有 5 个节点</p>
+以上 <strong>L</strong> 是一个 链表 实例 他有 5 个节点</p>
 <h4>嵌套类</h4>
 <hr />
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
@@ -156,7 +156,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">transition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
             <span class="k">for</span> <span class="n">_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="mi">1</span><span class="p">:])):</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="n">_index</span><span class="p">])</span><span class="err">··</span><span class="c1"># self.Node(_data)</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="n">_index</span><span class="p">])</span>  <span class="c1"># self.Node(_data)</span>
                 <span class="k">if</span> <span class="n">_index</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">):</span>
                     <span class="n">transition</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="n">node</span>
                     <span class="n">transition</span> <span class="o">=</span> <span class="n">transition</span><span class="o">.</span><span class="n">_next</span>
@@ -250,7 +250,7 @@
 <p>以上 SingleLinkedList 类中 定义 Node 类  <strong>[嵌套类]</strong>，当 SingleLinkedList 调用 Node 类时 直接 在 类中声明 <em>self.Node(_data)</em> ，即调用了并构成了一个节点
 不同于 我的 调用方式<br>
 参考 <a href="http://www.cnblogs.com/aguncn/p/4200113.html" title="内部类中调用外部类的方法">http://www.cnblogs.com/aguncn/p/4200113.html</a><br>
-他是通过 语法糖 @classmethod 来实现 <strong>类方法</strong> 对 内部类的调用</p>
+他是通过 语法糖 @classmethod 来实现 <strong>类方法</strong> 对 内部类的调用。</p>
             </div><!-- /.entry-content -->
             <div class="comments">
               <h2>Comments !</h2>
