@@ -84,7 +84,7 @@
               </address>
             </footer><!-- /.post-info -->
             <div class="entry-content">
-              <h3>结合嵌套类进行链表的实现</h3>
+              <h3>结合嵌套类进行单链表的实现</h3>
 <h4>引子</h4>
 <p>&nbsp;&nbsp;今天是国庆节，也是我加强算法和数据结构的第一天，目的是尝试将 C 与 CPP 实现的 数据结构 或 算法 利用 Python 实现下，尤其是加强下自己的算法设计能力，每每言此即想到 CloudIn 的面试，时间很紧，自己水平一般，找到问题，赶紧弥补。
 &nbsp;&nbsp;进入正题，本来是要参考并实现 单链表 结构，结果看到了 Nested Class 本来不知道怎么查相关资料 或者说这个关键字不知道，就说 "类中类"，百度没有，就 SOV5 {Class in Class} 专业术语叫 嵌套类，惭愧！之前接触 Django 是就出现了 嵌套类，即 metaclass 的实现。</p>
@@ -115,10 +115,10 @@
 <hr />
 <h4>单链表</h4>
 <p>&nbsp;&nbsp;接下来分析 单链表 的构成。若下图 节点 A 与 节点 B 实现了一个简单的 链表<br>
-<img src="images/LinkedList.png" width="500" height="120"><br>
+<div align="center"><img src="images/LinkedList.png" width="500" height="120" alt="LinkedList"></div><br>
 链表是由一个一个节点连成的<strong>表</strong>，一个节点分为 data &amp; pointer 分别存储 该节点 的 数据内容 与 下一个 节点  的 <strong>地址</strong>，如下图所示，python 实现的 SingleLinkedList 对应 链表的数据结构<br>
-<img src="images/Listinstance.png" width="300" height="120"><br>
-以上 <strong>L</strong> 是一个 链表 实例 他有 5 个节点</p>
+<div align="center"><img src="images/Listinstance.png" width="300" height="150" alt="instance"></div><br>
+以上 <strong>l</strong> 是一个 链表 实例 他有 5 个节点</p>
 <h4>嵌套类</h4>
 <hr />
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
@@ -251,6 +251,140 @@
 不同于 我的 调用方式<br>
 参考 <a href="http://www.cnblogs.com/aguncn/p/4200113.html" title="内部类中调用外部类的方法">http://www.cnblogs.com/aguncn/p/4200113.html</a><br>
 他是通过 语法糖 @classmethod 来实现 <strong>类方法</strong> 对 内部类的调用。</p>
+<hr />
+<p>10/2/2016 8:49:13 PM </p>
+<h3>双链表的实现</h3>
+<p><em>demo</em></p>
+<h4>双链表的进阶实现</h4>
+<div class="highlight"><pre><span></span><span class="c1"># 双链表 实现</span>
+
+<span class="k">class</span> <span class="nc">DoubleLinkedList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;docstring for DoubleLinkedList&quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">DNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;docstring for DNode&quot;&quot;&quot;</span>
+        <span class="n">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_prior&#39;</span><span class="p">,</span> <span class="s1">&#39;_data&#39;</span><span class="p">,</span> <span class="s1">&#39;_next&#39;</span><span class="p">]</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">_data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c1"># GET</span>
+        <span class="k">def</span> <span class="nf">getPrior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span>
+        <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+        <span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next</span>
+        <span class="k">def</span> <span class="nf">getDNode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">getPrior</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDNode</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">getNext</span><span class="p">()]</span>
+
+        <span class="c1"># SET</span>
+        <span class="k">def</span> <span class="nf">setPrior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_prior</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span> <span class="o">=</span> <span class="n">_prior</span>
+        <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">_data</span>
+        <span class="k">def</span> <span class="nf">setNext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_next</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="n">_next</span>
+        <span class="k">def</span> <span class="nf">setDNode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_prior</span><span class="p">,</span> <span class="n">_data</span><span class="p">,</span> <span class="n">_next</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="n">_prior</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">_next</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initLinkedList</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DoubleLinkedList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">initLinkedList</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tail</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DNode</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">transition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+            <span class="k">for</span> <span class="n">_data</span> <span class="ow">in</span> <span class="n">initLinkedList</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">dnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DNode</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+                <span class="n">transition</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">dnode</span><span class="p">)</span>
+                <span class="n">dnode</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="n">transition</span><span class="p">)</span>
+                <span class="n">transition</span> <span class="o">=</span> <span class="n">dnode</span>
+                <span class="k">if</span> <span class="n">_data</span> <span class="o">==</span> <span class="n">initLinkedList</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_tail</span> <span class="o">=</span> <span class="n">transition</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">initLinkedList</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;得到 当前 双链表 长度&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span>
+
+    <span class="k">def</span> <span class="nf">getAllData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;得到 当前 双链表 所有 节点 对应 存储数据&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSize</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s1">&#39;EMPTY&#39;</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">transition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+            <span class="n">LinkedList</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getSize</span><span class="p">()):</span>
+                <span class="n">LinkedList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transition</span><span class="o">.</span><span class="n">getData</span><span class="p">())</span>
+                <span class="n">transition</span> <span class="o">=</span> <span class="n">transition</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">LinkedList</span>
+
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;链表 尾部 添加 节点&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSize</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DNode</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="n">dnode</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tail</span> <span class="o">=</span> <span class="n">dnode</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DNode</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tail</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">dnode</span><span class="p">)</span>
+            <span class="n">dnode</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tail</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tail</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">appendleft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;链表 头部 添加节点&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSize</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DNode</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="n">dnode</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tail</span> <span class="o">=</span> <span class="n">dnode</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DNode</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="n">dnode</span><span class="p">)</span>
+            <span class="n">dnode</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">getPrior</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">,</span> <span class="n">_position</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;链表任意 位置 之前 插入 节点&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">_position</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">_position</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSize</span><span class="p">():</span>
+            <span class="k">print</span> <span class="s1">&#39;该链表 不存在 这个位置&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">transition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getSize</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">_position</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">transition</span> <span class="o">=</span> <span class="n">transition</span><span class="o">.</span><span class="n">getNext</span><span class="p">()</span>
+            <span class="sd">&quot;&quot;&quot; BUG 为什么没有将 dnode 成功 插入 (if getAllData)&quot;&quot;&quot;</span>
+            <span class="n">dnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DNode</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+            <span class="n">dnode</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="n">transition</span><span class="o">.</span><span class="n">getPrior</span><span class="p">())</span>
+            <span class="n">dnode</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">transition</span><span class="p">)</span>
+            <span class="n">transition</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="n">dnode</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;链表 删除 数据&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;查找 数据 对应 位置&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+
+
+<hr />
+<h4>实例化</h4>
+<p>&nbsp;&nbsp;若下图，实现 双链表 DNode= (prior, data, next) 的实例化
+<br>
+<div align="center"><img src="images/DListinstance.png" alt="LinkedList"></div><br></p>
             </div><!-- /.entry-content -->
             <div class="comments">
               <h2>Comments !</h2>

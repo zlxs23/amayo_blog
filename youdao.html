@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <title>命令行查字典</title>
+        <meta charset="utf-8" />
+          <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico">
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/pygment.css" />
+
+        <script src="https://zlxs23.github.io/theme/js/libs/modernizr-2.6.2.min.js"></script>
+        <script src="https://zlxs23.github.io/theme/js/libs/jquery-1.9.1.min.js"></script>
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="https://zlxs23.github.io/">Amayo <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+              <ul class="columns">
+                <li><a href="https://zlxs23.github.io/">Home</a></li>
+
+            <script type="text/javascript">
+              if (About == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="about.html">About</a></li>
+            <script type="text/javascript">
+              if (Wiki == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+            <script type="text/javascript">
+              if (Source == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="https://zlxs23.github.io/youdao.html" rel="bookmark"
+                   title="Permalink to 命令行查字典">命令行查字典</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2016-10-02T00:00:00+08:00">
+                2016-10-02
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="https://zlxs23.github.io/author/amayou.html"> Amayou</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h3>有道+命令行</h3>
+<p>这个功能本身在我的公众号上首先实现的，欢迎关注我的公众号<br>
+<div align="center"><img src="images/wechat.jpg" alt="LinkedList"></div><br></p>
+<h4>有道 API</h4>
+<p>&nbsp;&nbsp;点击  <a href="http://fanyi.youdao.com/openapi?path=data-mode" title="有道翻译API">http://fanyi.youdao.com/openapi?path=data-mode</a> 进行申请 有道翻译 API 即可利用 有道翻译 词库，如下图，提交相关信息，即可实现。<br>
+<div align="center"><img src="images/youdaoapi.png" width="600" height="300" alt="LinkedList"></div><br></p>
+<h4>python</h4>
+<p>&nbsp;&nbsp;分别利用 Python2 与 Python3 实现 命令行 翻译功能</p>
+<h5>所要利用 の 模块</h5>
+<ol>
+<li><strong>sys</strong>
+    作 命令行 接收 参数</li>
+<li><strong>urllib</strong>
+    作 获取 数据</li>
+<li><strong>json</strong>
+    作 解析 json</li>
+</ol>
+<h5>实现 #####</h5>
+<p>&nbsp;&nbsp;利用 有道 API 的 数据格式 分析 -- JSON 获取 我们需要的数据
+实现 Python2 版 代码</p>
+<hr />
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># 这里最大问题 即 仅仅支持 py2</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">youdao</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">qword</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="o">=</span> <span class="s1">&#39;你的 id&#39;</span>
+    <span class="n">KEY</span> <span class="o">=</span> <span class="s1">&#39;你的 key&#39;</span>
+    <span class="n">baseurl</span> <span class="o">=</span> <span class="s1">r&#39;http://fanyi.youdao.com/openapi.do?keyfrom=&#39;</span> <span class="o">+</span> <span class="n">ID</span> <span class="o">+</span> <span class="s1">&#39;&amp;key=&#39;</span> <span class="o">+</span> <span class="n">KEY</span> <span class="o">+</span> <span class="s1">&#39;&amp;type=data&amp;doctype=json&amp;version=1.1&amp;q=&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">baseurl</span><span class="o">+</span><span class="n">qword</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">resp</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+    <span class="n">fanyi</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;errorCode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;basic&#39;</span> <span class="ow">in</span> <span class="n">fanyi</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">trans</span> <span class="o">=</span> <span class="s1">u&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s1">Web Explanation:</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;translation&#39;</span><span class="p">]),</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;basic&#39;</span><span class="p">][</span><span class="s1">&#39;explains&#39;</span><span class="p">]),</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;web&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span>
+            <span class="k">print</span> <span class="n">trans</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">trans</span> <span class="o">=</span> <span class="s1">u&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="se">\n</span><span class="s1">Base Translation:</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;translation&#39;</span><span class="p">]))</span>
+            <span class="k">print</span> <span class="n">trans</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">u&#39;Sorry,Spelling </span><span class="si">%s</span><span class="s1"> is Error...[ErrorCode is </span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;errorCode&#39;</span><span class="p">])</span>
+ <span class="sb">``</span><span class="err">`</span>
+ <span class="err">实现</span> <span class="n">Python3</span> <span class="err">版</span> <span class="err">代码</span>
+
+<span class="o">----------</span>
+
+<span class="sb">``</span><span class="err">`</span><span class="n">python</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">youdao</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">qword</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="o">=</span> <span class="s1">&#39;你的 id&#39;</span>
+    <span class="n">KEY</span> <span class="o">=</span> <span class="s1">&#39;你的 key&#39;</span>
+    <span class="n">baseurl</span> <span class="o">=</span> <span class="s1">r&#39;http://fanyi.youdao.com/openapi.do?keyfrom=&#39;</span> <span class="o">+</span> <span class="n">ID</span> <span class="o">+</span> <span class="s1">&#39;&amp;key=&#39;</span> <span class="o">+</span> <span class="n">KEY</span> <span class="o">+</span> <span class="s1">&#39;&amp;type=data&amp;doctype=json&amp;version=1.1&amp;q=&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">baseurl</span><span class="o">+</span><span class="n">qword</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">resp</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+    <span class="n">fanyi</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;errorCode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;basic&#39;</span> <span class="ow">in</span> <span class="n">fanyi</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">trans</span> <span class="o">=</span> <span class="s1">u&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s1">Web Explanation:</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;translation&#39;</span><span class="p">]),</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;basic&#39;</span><span class="p">][</span><span class="s1">&#39;explains&#39;</span><span class="p">]),</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;web&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">trans</span> <span class="o">=</span> <span class="s1">u&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="se">\n</span><span class="s1">Base Translation:</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;translation&#39;</span><span class="p">]))</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">u&#39;Sorry,Spelling </span><span class="si">%s</span><span class="s1"> is Error...[ErrorCode is </span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">fanyi</span><span class="p">[</span><span class="s1">&#39;errorCode&#39;</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># 支持 命令行 调用</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">youdao</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</pre></div>
+
+
+<h5>完成效果</h5>
+<p><div align="center"><img src="images/youdaocmd.png" width="400" height="120" alt="LinkedList"></div><br></p>
+<h4>需要改进的地方</h4>
+<p>这样做会出现延迟 (待解决)，输出(打印)可以格式化的更加好看，例如更加清晰，更加高亮等等。<br>
+&nbsp;&nbsp;Refer: <a href="http://lazynight.me/3378.html" title="吉吉于的实现">http://lazynight.me/3378.html</a></p>
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h2>Comments !</h2>
+              <!-- Duoshuo Comment BEGIN -->
+              <div class="ds-thread" data-title="命令行查字典" data-url="https://zlxs23.github.io/youdao.html"></div>
+              <script type="text/javascript">
+                var duoshuoQuery = {short_name:"amayou"};
+                (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- Duoshuo Comment END -->
+            </div>
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+      <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="https://zlxs23.github.io/category/job.html">job</a></li>
+		<li><a href="https://zlxs23.github.io/category/life.html">life</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://weibo.com/u/2219037751">Weibo</a></li>
+    <li><a href="https://github.com/zlxs23">Github</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                <li><div class="btn primary"><a href="https://github.com/zlxs23" target="_blank">Github</a></div></li>
+
+                <li><div class="btn twitter"><a href="http://weibo.com/amayou" target="_blank">Weibo</a></div></li>
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="https://zlxs23.github.io/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="https://zlxs23.github.io/theme/js/libs/gumby.min.js"></script>
+  <script src="https://zlxs23.github.io/theme/js/plugins.js"></script>
+</body>
+</html>
