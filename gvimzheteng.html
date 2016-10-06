@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <title>在 Windows 下 Gvim 的基本插件安装配置</title>
+        <meta charset="utf-8" />
+          <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico">
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://zlxs23.github.io/theme/pygment.css" />
+
+        <script src="https://zlxs23.github.io/theme/js/libs/modernizr-2.6.2.min.js"></script>
+        <script src="https://zlxs23.github.io/theme/js/libs/jquery-1.9.1.min.js"></script>
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="https://zlxs23.github.io/">Amayo <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+              <ul class="columns">
+                <li><a href="https://zlxs23.github.io/">Home</a></li>
+
+            <script type="text/javascript">
+              if (About == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="about.html">About</a></li>
+            <script type="text/javascript">
+              if (Wiki == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+            <script type="text/javascript">
+              if (Source == 'Source') {
+                $(function() {
+                  this.css('float', 'right');
+              })
+              }
+            </script>
+            <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="https://zlxs23.github.io/gvimzheteng.html" rel="bookmark"
+                   title="Permalink to 在 Windows 下 Gvim 的基本插件安装配置">在 Windows 下 Gvim 的基本插件安装配置</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2016-10-06T00:00:00+08:00">
+                2016-10-06
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="https://zlxs23.github.io/author/amayou.html"> Amayou</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h3>Install &amp; Config of Gvim</h3>
+<h3>这是有关 Windows 下 Gvim 的配置 文章</h3>
+<h4>2016年10月5日23:23:45</h4>
+<hr />
+<h4>接下来以 Plugin 来说明</h4>
+<p>以下所有插件都是 针对 <strong>Windows</strong>下 <strong>Gvim</strong> の 安装配置过程，建议按照以下解决问题过程来 安装配置：</p>
+<ol>
+<li>按照官方 安装及配置 方式来操作</li>
+<li>若出现问题，首先在官方の issues 里进行查询或 commit 问题并解决</li>
+<li>若还未解决或出现类似我接下来描述的问题相似的，请结合 google 与 我的解决方式一起来处理</li>
+</ol>
+<p>所有插件 <strong>下载方式</strong> 可通过 Git (git clone | git pull?) 或直接 在 <a href="https://github.com" title="插件作者/插件名">Github</a> or <a href="http://www.vim.org/scripts/script.php" title="可能需要科学上网">Vim-Script</a> 上下载，建议以 前者为主，后者为辅 的方法进行。
+(后者方法可能不能正常使用 help OR Vundle 不能正常识别！！！)</p>
+<p>所有插件 <strong>配置方式</strong> 建议以 官方说明为主。</p>
+<p><strong>注意:</strong></p>
+<ol>
+<li>建议将 Vim 安装在 C:\ 下 即路径为 C:\Vim 这样做 不会出现 路径中出现 <em>空格</em></li>
+<li>这里只说明我在网上不常见的问题及解决方式</li>
+</ol>
+<h6>1. Vundle</h6>
+<div class="highlight"><pre><span></span>For 插件管理
+</pre></div>
+
+
+<p>下载位置: <a href="https://github.com/VundleVim/Vundle.vim" title="Vundle">Vundle</a></p>
+<p>这个插件是所有插件之本，正是因为这个插件的正确安装，其他插件才得以成功安装，由于我是 Vim8.0 版，安装的过程也是按照网上的大多数方法进行安装；</p>
+<ol>
+<li>在 Github 上下载该插件の库</li>
+<li>按照官方安装配置方法进行接下来操作</li>
+</ol>
+<p>在 Vim 所在安装位置 ($VIM) 下的 _vimrc 文件 ($MYVIMRC) 里找个合适位置进行 Vundle 配置，添加以下代码设置：</p>
+<div class="highlight"><pre><span></span><span class="c">&quot; For Vundle</span>
+<span class="k">set</span> <span class="nb">rtp</span><span class="p">+=</span>$VIM<span class="sr">/vimfiles/</span>bundle<span class="sr">/Vundle.vim/</span>   <span class="c">&quot; 设置 Vundle 插件所在位置</span>
+<span class="k">call</span> vundle#begin<span class="p">(</span><span class="s1">&#39;$VIM/vimfiles/bundle/&#39;</span><span class="p">)</span>  <span class="c">&quot; 声明以下带Plugin &#39;插件&#39;为所有插件--位置 (即在 $VIM 下的 vimfiles 新建 bundle 文件夹)</span>
+<span class="c">&quot; 添加自己需要的 插件</span>
+<span class="k">call</span> vundle#<span class="k">end</span><span class="p">()</span>                           <span class="c">&quot; 声明以上为 Vundle 所有插件</span>
+</pre></div>
+
+
+<p>如果按照以上过程即可使用 Vundle 进行插件管理了，但是我出现了一个 <strong>惊人</strong> 的问题！苦恼不已，中文里查不到，就一个一个浏览 Github 上の issues 并在 Stack Overflow 上查询，最终 "合理" 解决了以下问题。</p>
+<p>问题描述(举例说明):</p>
+<p>当我安装 NERDTree 这个插件时，在命令模式下键入 PluginInstall, 即可自动调用 Git (按照以下指令) 到 Github 上下载并安装 对应插件，</p>
+<div class="highlight"><pre><span></span>git clone <span class="p">-</span>recursive <span class="s2">&quot;https://github.com/scrooloose/nerdtree&quot;</span> <span class="s2">&quot;C:\Vim\vimfiles\bundle\scrooloose\nerdtree&quot;</span> <span class="s2">&quot;缓存位置&quot;</span>
+</pre></div>
+
+
+<p>可是他并没有在我 的 "C:\Vim\vimfiles\bundle" 创建任何文件！而是可怕地在 C 盘下直接创建了一个 "~~Vimvimfilesbundlescrooloosenerdtree~~" 文件夹！失败后查看失败 log 发现 git 还真的 cloning to 上述奇怪文件夹(这个奇怪的文件夹直接相当于将我所声明的 \ <strong>无视</strong>了)下！</p>
+<p>解决方式：</p>
+<p>找到 C:\Vim\vimfiles\bundle\Vundle.vim\vundle\installer.vim 文件，修改第 418 行附近代码</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> cmd <span class="p">=</span> <span class="s1">&#39;git clone --recursive &#39;</span>.vundle#installer#shellesc<span class="p">(</span><span class="k">a</span>:bundle.uri<span class="p">)</span>.<span class="s1">&#39; &#39;</span>.vundle#installer#shellesc<span class="p">(</span><span class="k">a</span>:bundle.<span class="nb">path</span><span class="p">())</span>
+</pre></div>
+
+
+<p>Update:</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> cmd <span class="p">=</span> <span class="s1">&#39;git clone --recursive &#39;</span>.vundle#installer#shellesc<span class="p">(</span><span class="k">a</span>:bundle.uri<span class="p">)</span>.<span class="s1">&#39; &#39;</span>.vundle#installer#shellesc<span class="p">(</span>substitute<span class="p">(</span><span class="k">a</span>:bundle.<span class="nb">path</span><span class="p">(),</span> <span class="s1">&#39;\&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>解决方法来源：<a href="https://github.com/VundleVim/Vundle.vim/issues/472" title="谢谢这位大哥">issues</a></p>
+<p>问题原因：</p>
+<p>可能是因为 Vundle.vim 无法识别 Windows 下 反斜杠与斜杠???</p>
+<p><strong>使用方式</strong>
+1. 三种 配置格式，即 Plugin '怎么声明'
+2. 可更新
+3. 可安装
+4. 可删除
+5. 可可可</p>
+<h6>2. NERDTree</h6>
+<div class="highlight"><pre><span></span>For 文件管理
+</pre></div>
+
+
+<p>下载位置: <a href="https://github.com/scrooloose/nerdtree" title="NERDTree">NERDTree</a>
+建议利用 Vundle 进行安装管理，配置可查看官方说明 或 直接 在命令模式下 键入 h nerdtree</p>
+<h6>3. YouCompleteMe</h6>
+<div class="highlight"><pre><span></span>For 自动补全
+</pre></div>
+
+
+<p>下载位置: <a href="https://github.com/Valloric/YouCompleteMe" title="YCM">YouCompleteMe</a>
+这个插件是目前来说最难安装配置的，虽然很好用，光安装文件就 100多M，可怕，配置过程需要好多东西！
+首先说明他需要的基础环境：<br>
+- Python 运行环境
+- Cmake 编译安装程序
+- Visual Studio 什么鬼？
+- 7-zip 解压缩</p>
+<p>我除了 Visual Studio 其他都可以简单安装...
+按照官方 Vundle PluginInstall 了很长时间，尤其是 third-party 耗费了很长时间
+最终没办法求助知乎：
+<a href="https://www.zhihu.com/question/25437050" title="韦易笑已经将该插件编译过了">韦易笑の回答</a>
+<a href="http://pan.baidu.com/s/1bEY3cq" title="90M左右">韦易笑提供的 YCM 安装文件</a>
+<a href="https://www.microsoft.com/zh-cn/download/details.aspx?id=48145" title="按版本选择">韦易笑提供的 Visual Studio 编译环境</a>
+韦易笑在提供的百度云文件中有声明在 $MYVIRMC 中添加对应 Python 路径等。</p>
+<h6>4. Multiple-Cursors</h6>
+<div class="highlight"><pre><span></span>For 多行编辑
+</pre></div>
+
+
+<p>下载位置: <a href="https://github.com/terryma/vim-multiple-cursors" title="Multiple-Cursors">Multiple-Cursors</a>
+同 NERDTree 直接在 Vundle 声明并安装。</p>
+<h6>5. Taglist</h6>
+<div class="highlight"><pre><span></span>For 代码预览
+</pre></div>
+
+
+<p>下载位置: <a href="#" title="直接声明就好">Taglist</a></p>
+<ol>
+<li>首先下载 <a href="http://ctags.sourceforge.net/" title="按版本选择">ctags</a></li>
+<li>然后可以通过 Vundle 声明并安装。</li>
+</ol>
+<h6>6. NERDCommenter</h6>
+<div class="highlight"><pre><span></span>For 快捷注释
+</pre></div>
+
+
+<p>下载位置: <a href="https://github.com/scrooloose/nerdcommenter" title="NERDCommenter">NERDCommenter</a>
+若 Vundle 无法下载安装，建议直接到 插件官方 Github 上下载，并解压到 bundle 目录下。</p>
+<h6>7. Airline</h6>
+<div class="highlight"><pre><span></span>For 美化状态栏
+</pre></div>
+
+
+<p>下载位置: <a href="#" title="直接声明就好">Airline</a>
+同 Multiple-Cursors 直接在 Vundle 声明并安装。</p>
+<h6>8. Syntastic</h6>
+<div class="highlight"><pre><span></span>For 语法分析
+</pre></div>
+
+
+<p>下载位置: <a href="#" title="直接声明就好">Syntastic</a>
+同 Airline 直接在 Vundle 声明并安装。</p>
+<h6>9. LookupFile</h6>
+<div class="highlight"><pre><span></span>For 模糊查询文件
+</pre></div>
+
+
+<p>下载位置: <a href="http://www.vim.org/scripts/script.php?script_id=1581" title="LookupFile">LookupFile</a>
+与 Genuntils 一齐 在 vim-scripts 上直接下载安装。</p>
+<h6>10. Genutils</h6>
+<div class="highlight"><pre><span></span>For 基础插件
+</pre></div>
+
+
+<p>下载位置: <a href="http://www.vim.org/scripts/script.php?script_id=197" title="Genuntils">Genutils</a>
+同 LookupFile</p>
+<h6>11. Vim-Surround</h6>
+<div class="highlight"><pre><span></span>For 对称符处理
+</pre></div>
+
+
+<p>下载位置: <a href="#" title="直接声明就好">Vim-Surround</a></p>
+<h6>12. Vim-Markdown</h6>
+<div class="highlight"><pre><span></span>For MarkDown 语法高亮
+</pre></div>
+
+
+<p>下载位置: <a href="#" title="直接声明就好">Vim-Surround</a>
+同 Syntastic 直接在 Vundle 声明并安装。</p>
+<hr />
+<h5>总结</h5>
+<p>这 12 个 vim 插件安装和配置 花了我将近 一个白天。但是很值得！
+虽然就在我使用 vim 编写 Markdown 文档时出现了 Gvim 不断崩溃的状况...
+╮(╯▽╰)╭  vim <strong>好能折腾啊</strong>
+欢迎各位 ~~VIM~~ 党来沟通和交流~</p>
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h2>Comments !</h2>
+              <!-- Duoshuo Comment BEGIN -->
+              <div class="ds-thread" data-title="在 Windows 下 Gvim 的基本插件安装配置" data-url="https://zlxs23.github.io/gvimzheteng.html"></div>
+              <script type="text/javascript">
+                var duoshuoQuery = {short_name:"amayou"};
+                (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- Duoshuo Comment END -->
+            </div>
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/zlxs23/zlxs23.github.io/wiki">Wiki</a></li>
+      <li><a href="https://github.com/zlxs23/zlxs23.github.io">Source</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="https://zlxs23.github.io/category/job.html">job</a></li>
+		<li><a href="https://zlxs23.github.io/category/life.html">life</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://weibo.com/u/2219037751">Weibo</a></li>
+    <li><a href="https://github.com/zlxs23">Github</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                <li><div class="btn primary"><a href="https://github.com/zlxs23" target="_blank">Github</a></div></li>
+
+                <li><div class="btn twitter"><a href="http://weibo.com/amayou" target="_blank">Weibo</a></div></li>
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="https://zlxs23.github.io/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="https://zlxs23.github.io/theme/js/libs/gumby.min.js"></script>
+  <script src="https://zlxs23.github.io/theme/js/plugins.js"></script>
+</body>
+</html>
